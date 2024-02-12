@@ -9,6 +9,8 @@ export default {
       },
       colors: {
         lightGray: "#e9e9e9",
+        bgInput: "#f4f4f4",
+        activePurpleBorder: "#a445ed",
       },
     },
   },
