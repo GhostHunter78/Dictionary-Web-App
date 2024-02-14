@@ -38,16 +38,6 @@ const Header = () => {
     setIsDarkModeVisible((prevState) => !prevState);
   };
 
-  const [searchInput, setSearchInput] = useState("");
-
-  const handleSearchClick = () => {
-    onSearch(searchInput);
-  };
-
-  const handleInputChange = (event) => {
-    setSearchInput(event.target.value);
-  };
-
   return (
     <>
       <div className="flex flex-col items-center px-6 py-6 w-screen">
@@ -99,14 +89,9 @@ const Header = () => {
             type="text"
             placeholder="Search for any word..."
             autoFocus
-            value={searchInput}
-            onChange={handleInputChange}
-          ></input>
+          />
           <label className="absolute grid place-items-center top-0 bottom-0 right-0.5">
-            <button
-              className="bg-transparent border-0 p-5"
-              onClick={handleSearchClick}
-            >
+            <button className="bg-transparent border-0 p-5">
               <SearchIcon />
             </button>
           </label>

@@ -31,7 +31,17 @@ function WordDefinition({ word }) {
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="flex flex-col items-center px-6 mt-8">
+        😕
+        <p className="tex-[18px] font-bold mt-5 mb-4">No Definitions Found</p>
+        <p className="text-[15px] text-grayWords w-[300px]">
+          Sorry pal, we couldn't find definitions for the word you were looking
+          for. You can try the search again at later time or head to the web
+          instead.
+        </p>
+      </div>
+    );
   }
 
   const partsOfSpeech = [
