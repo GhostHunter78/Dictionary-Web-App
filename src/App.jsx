@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Header />
-      {/* {<WordDefinition word="dictionary" />} */}
+      <WordDefinition word="love" />
     </>
   );
 }

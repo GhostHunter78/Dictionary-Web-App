@@ -11,6 +11,8 @@ export default {
         lightGray: "#e9e9e9",
         bgInput: "#f4f4f4",
         activePurpleBorder: "#a445ed",
+        grayWords: "#757575",
+        meanings: "#2d2d2d",
       },
     },
   },

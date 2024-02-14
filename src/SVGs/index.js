@@ -5,3 +5,5 @@ export { default as DarkModeToggle } from "./DarkModeToggle";
 export { default as MoonIcon } from "./MoonIcon";
 export { default as DarkMoon } from "./DarkMoon";
 export { default as SearchIcon } from "./SearchIcon";
+export { default as PlayIcon } from "./PlayIcon";
+export { default as NewWindowIcon } from "./NewWindowIcon";
