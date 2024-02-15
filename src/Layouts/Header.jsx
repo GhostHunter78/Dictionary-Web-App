@@ -7,7 +7,7 @@ import SearchIcon from "../SVGs/SearchIcon";
 import DarkMoon from "../SVGs/DarkMoon";
 import { useRef, useState, useEffect } from "react";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -36,6 +36,22 @@ const Header = () => {
   const toggleMode = () => {
     setIsLightModeVisible((prevState) => !prevState);
     setIsDarkModeVisible((prevState) => !prevState);
+  };
+
+  const [searchInput, setSearchInput] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [inputBorder, setInputBorder] = useState("none");
+
+  const handleSearch = () => {
+    if (searchInput.trim() === "") {
+      // Show error message if search input is empty
+      setShowError(true);
+      setInputBorder("red");
+    } else {
+      setShowError(false);
+      onSearch(searchInput.trim());
+      setInputBorder("none");
+    }
   };
 
   return (
@@ -85,17 +101,28 @@ const Header = () => {
         <div className=" w-full grid relative mt-6">
           <input
             id="searchInput"
-            className="py-4 px-6 border-none rounded-2xl text-base font-semibold text-black bg-bgInput focus:outline-activePurpleBorder"
+            className="py-4 px-6 rounded-2xl text-base font-semibold text-black bg-bgInput focus:outline-activePurpleBorder"
+            style={{ border: inputBorder }}
             type="text"
             placeholder="Search for any word..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
             autoFocus
           />
           <label className="absolute grid place-items-center top-0 bottom-0 right-0.5">
-            <button className="bg-transparent border-0 p-5">
+            <button
+              className="bg-transparent border-0 p-5"
+              onClick={handleSearch}
+            >
               <SearchIcon />
             </button>
           </label>
         </div>
+        {showError && (
+          <p className="text-red-500 mt-2 self-start">
+            Whoops, can’t be empty…
+          </p>
+        )}
       </div>
     </>
   );
