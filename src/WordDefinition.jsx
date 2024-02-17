@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PlayIcon from "./SVGs/PlayIcon";
 import NewWindowIcon from "./SVGs/NewWindowIcon";
 
-function WordDefinition({ word }) {
+function WordDefinition({ word, selectedFont, setSelectedFont }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,6 +18,7 @@ function WordDefinition({ word }) {
           const data = response.data;
           console.log(response);
           setData(data);
+          setError(null);
         }
       } catch (error) {
         setError(error);
@@ -31,6 +32,36 @@ function WordDefinition({ word }) {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div
+        className="flex flex-col items-center px-6 mt-8"
+        style={{
+          fontFamily:
+            selectedFont === "Sans Serif"
+              ? "'Inter', sans-serif"
+              : selectedFont === "Serif"
+              ? "'Lora', serif"
+              : selectedFont === "Mono"
+              ? "'Inconsolata', monospace"
+              : null,
+        }}
+      >
+        😕
+        <p className="tex-[18px] font-bold mt-5 mb-4">No Definitions Found</p>
+        <p className="text-[15px] text-grayWords w-[300px]">
+          Sorry pal, we couldn't find definitions for the word you were looking
+          for. You can try the search again at later time or head to the web
+          instead.
+        </p>
+      </div>
+    );
+  }
+
+  if (!data || !data.length) {
+    return null;
   }
 
   const partsOfSpeech = [
@@ -54,7 +85,18 @@ function WordDefinition({ word }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        fontFamily:
+          selectedFont === "Sans Serif"
+            ? "'Inter', sans-serif"
+            : selectedFont === "Serif"
+            ? "'Lora', serif"
+            : selectedFont === "Mono"
+            ? "'Inconsolata', monospace"
+            : null,
+      }}
+    >
       {data && data.length > 0 ? (
         <div className="px-6 pb-[85px]">
           <div className="w-full flex items-center justify-between">
@@ -161,17 +203,6 @@ function WordDefinition({ word }) {
               </div>
             ))}
           </div>
-        </div>
-      ) : null}
-      {error ? (
-        <div className="flex flex-col items-center px-6 mt-8">
-          <p className="text-[40px]">😕</p>
-          <p className="tex-[18px] font-bold mt-5 mb-4">No Definitions Found</p>
-          <p className="text-[15px] text-grayWords w-[300px]">
-            Sorry pal, we couldn't find definitions for the word you were
-            looking for. You can try the search again at later time or head to
-            the web instead.
-          </p>
         </div>
       ) : null}
     </div>

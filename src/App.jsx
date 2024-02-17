@@ -4,6 +4,7 @@ import WordDefinition from "./WordDefinition";
 
 function App() {
   const [searchedWord, setSearchedWord] = useState("");
+  const [selectedFont, setSelectedFont] = useState("Sans Serif");
 
   const handleSearch = (word) => {
     setSearchedWord(word);
@@ -12,8 +13,16 @@ function App() {
   return (
     <>
       <div className="">
-        <Header onSearch={handleSearch} />
-        <WordDefinition word={searchedWord} />
+        <Header
+          onSearch={handleSearch}
+          selectedFont={selectedFont}
+          setSelectedFont={setSelectedFont}
+        />
+        <WordDefinition
+          word={searchedWord}
+          selectedFont={selectedFont}
+          setSelectedFont={setSelectedFont}
+        />
       </div>
     </>
   );

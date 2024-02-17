@@ -7,9 +7,16 @@ import SearchIcon from "../SVGs/SearchIcon";
 import DarkMoon from "../SVGs/DarkMoon";
 import { useRef, useState, useEffect } from "react";
 
-const Header = ({ onSearch }) => {
+const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [isLightModeVisible, setIsLightModeVisible] = useState(true);
+  const [isDarkModeVisible, setIsDarkModeVisible] = useState(false);
+
+  const fontChoose = (font) => {
+    setSelectedFont(font);
+    setIsOpen(false);
+  };
 
   // using useEffect to handle the outside of the dropdown click action
   useEffect(() => {
@@ -29,9 +36,6 @@ const Header = ({ onSearch }) => {
   const toggleDropdown = () => {
     setIsOpen((prevState) => !prevState);
   };
-
-  const [isLightModeVisible, setIsLightModeVisible] = useState(true);
-  const [isDarkModeVisible, setIsDarkModeVisible] = useState(false);
 
   const toggleMode = () => {
     setIsLightModeVisible((prevState) => !prevState);
@@ -56,17 +60,29 @@ const Header = ({ onSearch }) => {
 
   return (
     <>
-      <div className="flex flex-col items-center px-6 py-6 w-screen">
-        <div className=" flex flex-row items-start justify-between w-full">
+      <div
+        className="flex flex-col items-center px-6 py-6 w-screen"
+        style={{
+          fontFamily:
+            selectedFont === "Sans Serif"
+              ? "'Inter', sans-serif"
+              : selectedFont === "Serif"
+              ? "'Lora', serif"
+              : selectedFont === "Mono"
+              ? "'Inconsolata', monospace"
+              : null,
+        }}
+      >
+        <div className="flex flex-row items-start justify-between w-full">
           <Logo />
           <div className="flex flex-row items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <div
-                className="w-[126px] flex items-center gap-4 border-lightGray border-solid border-r ml-24 py-1 pr-4 cursor-pointer"
+                className="flex items-center gap-4 border-lightGray border-solid border-r ml-24 py-1 pr-4 cursor-pointer"
                 onClick={toggleDropdown}
               >
-                <p className="font-inter font-bold text-right lg:text-base text-gray-700 md:text-gray-800 lg:text-gray-900">
-                  Sans Serif
+                <p className="font-bold text-right lg:text-base text-gray-700 md:text-gray-800 lg:text-gray-900">
+                  {selectedFont}
                 </p>
                 <DownArrowIcon />
               </div>
@@ -75,10 +91,37 @@ const Header = ({ onSearch }) => {
                   className="absolute z-20 border border-lightGray border-radius-[0.5rem] bg-white left-[136px] w-[126px] p-6 ml-[-2.5rem] cursor-pointer"
                   style={{ top: "100%" }}
                 >
-                  <ul className="text-gray-700">
-                    <li className="py-1 font-inter">Sans Serif</li>
-                    <li className="py-1 font-serif">Serif</li>
-                    <li className="py-1 font-mono">Mono</li>
+                  <ul className="text-gray-700 w-[100px]">
+                    <li
+                      onClick={() => fontChoose("Sans Serif")}
+                      className={`py-1 ${
+                        selectedFont === "Sans Serif"
+                          ? "text-black"
+                          : "text-[#2D2D2D]"
+                      } hover:text-[#A445ED]`}
+                    >
+                      Sans Serif
+                    </li>
+                    <li
+                      onClick={() => fontChoose("Serif")}
+                      className={`py-1 ${
+                        selectedFont === "Serif"
+                          ? "text-black"
+                          : "text-[#2D2D2D]"
+                      } hover:text-[#A445ED]`}
+                    >
+                      Serif
+                    </li>
+                    <li
+                      onClick={() => fontChoose("Mono")}
+                      className={`py-1 ${
+                        selectedFont === "Mono"
+                          ? "text-black"
+                          : "text-[#2D2D2D]"
+                      } hover:text-[#A445ED]`}
+                    >
+                      Mono
+                    </li>
                   </ul>
                 </div>
               )}
