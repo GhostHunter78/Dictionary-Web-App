@@ -64,10 +64,17 @@ const Header = ({
     }
   };
 
+  // when clicking on 'Enter' key on keyboard, it searches the word
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <>
+    <div className="flex flex-col px-6 py-6 w-screen md:pt-[60px] md:px-[40px]">
       <div
-        className="flex flex-col items-center px-6 py-6 w-screen"
+        className="lg:w-[736px] lg:justify-center lg:mx-auto"
         style={{
           fontFamily:
             selectedFont === "Sans Serif"
@@ -80,7 +87,7 @@ const Header = ({
           background: activeTheme === "light" ? "white" : "black",
         }}
       >
-        <div className="flex flex-row items-start justify-between w-full">
+        <div className="flex flex-row items-start justify-between w-full ">
           <Logo />
           <div className="flex flex-row items-center gap-4">
             <div className="relative" ref={dropdownRef}>
@@ -89,7 +96,7 @@ const Header = ({
                 onClick={toggleDropdown}
               >
                 <p
-                  className="font-bold text-right lg:text-base text-gray-700 md:text-gray-800 lg:text-gray-900"
+                  className="font-bold text-right lg:text-base text-gray-700 md:text-[18px]"
                   style={{ color: activeTheme === "light" ? "black" : "white" }}
                 >
                   {selectedFont}
@@ -98,7 +105,7 @@ const Header = ({
               </div>
               {isOpen && (
                 <div
-                  className="absolute z-20 border border-lightGray border-radius-[0.5rem] bg-white left-[136px] w-[126px] p-6 ml-[-2.5rem] cursor-pointer"
+                  className="absolute z-20 border border-lightGray border-radius-[0.5rem] bg-white left-[136px] w-[126px] p-6 ml-[-2.5rem] cursor-pointer md:w-[135px] md:text-[18px]"
                   style={{ top: "100%" }}
                 >
                   <ul className="text-gray-700 w-[100px]">
@@ -137,7 +144,7 @@ const Header = ({
               )}
             </div>
             <div
-              className="flex flex-row items-center gap-3"
+              className="flex flex-row items-center gap-3 cursor-pointer"
               onClick={toggleTheme}
             >
               <LightModeToggle
@@ -167,6 +174,7 @@ const Header = ({
             placeholder="Search for any word..."
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             autoFocus
           />
           <label className="absolute grid place-items-center top-0 bottom-0 right-0.5">
@@ -184,7 +192,7 @@ const Header = ({
           </p>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
