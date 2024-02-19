@@ -7,7 +7,13 @@ import SearchIcon from "../SVGs/SearchIcon";
 import DarkMoon from "../SVGs/DarkMoon";
 import { useRef, useState, useEffect } from "react";
 
-const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
+const Header = ({
+  onSearch,
+  selectedFont,
+  setSelectedFont,
+  activeTheme,
+  toggleTheme,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [isLightModeVisible, setIsLightModeVisible] = useState(true);
@@ -71,6 +77,7 @@ const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
               : selectedFont === "Mono"
               ? "'Inconsolata', monospace"
               : null,
+          background: activeTheme === "light" ? "white" : "black",
         }}
       >
         <div className="flex flex-row items-start justify-between w-full">
@@ -81,7 +88,10 @@ const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
                 className="flex items-center gap-4 border-lightGray border-solid border-r ml-24 py-1 pr-4 cursor-pointer"
                 onClick={toggleDropdown}
               >
-                <p className="font-bold text-right lg:text-base text-gray-700 md:text-gray-800 lg:text-gray-900">
+                <p
+                  className="font-bold text-right lg:text-base text-gray-700 md:text-gray-800 lg:text-gray-900"
+                  style={{ color: activeTheme === "light" ? "black" : "white" }}
+                >
                   {selectedFont}
                 </p>
                 <DownArrowIcon />
@@ -126,7 +136,10 @@ const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
                 </div>
               )}
             </div>
-            <div className="flex flex-row items-center gap-3">
+            <div
+              className="flex flex-row items-center gap-3"
+              onClick={toggleTheme}
+            >
               <LightModeToggle
                 onClick={toggleMode}
                 isVisible={isLightModeVisible}
@@ -144,8 +157,12 @@ const Header = ({ onSearch, selectedFont, setSelectedFont }) => {
         <div className=" w-full grid relative mt-6">
           <input
             id="searchInput"
-            className="py-4 px-6 rounded-2xl text-base font-semibold text-black bg-bgInput focus:outline-activePurpleBorder"
-            style={{ border: inputBorder }}
+            className="py-4 px-6 rounded-2xl text-base font-semibold text-black focus:outline-activePurpleBorder"
+            style={{
+              border: inputBorder,
+              background: activeTheme === "light" ? "#f4f4f4" : "#1f1f1f",
+              color: activeTheme === "light" ? "black" : "white",
+            }}
             type="text"
             placeholder="Search for any word..."
             value={searchInput}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PlayIcon from "./SVGs/PlayIcon";
 import NewWindowIcon from "./SVGs/NewWindowIcon";
 
-function WordDefinition({ word, selectedFont, setSelectedFont }) {
+function WordDefinition({ word, selectedFont, activeTheme, toggleTheme }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -50,8 +50,20 @@ function WordDefinition({ word, selectedFont, setSelectedFont }) {
         }}
       >
         😕
-        <p className="tex-[18px] font-bold mt-5 mb-4">No Definitions Found</p>
-        <p className="text-[15px] text-grayWords w-[300px]">
+        <p
+          className="tex-[18px] font-bold mt-5 mb-4"
+          style={{
+            color: activeTheme === "light" ? "black" : "white",
+          }}
+        >
+          No Definitions Found
+        </p>
+        <p
+          className="text-[15px] text-grayWords w-[300px]"
+          style={{
+            color: activeTheme === "light" ? "black" : "white",
+          }}
+        >
           Sorry pal, we couldn't find definitions for the word you were looking
           for. You can try the search again at later time or head to the web
           instead.
@@ -95,13 +107,19 @@ function WordDefinition({ word, selectedFont, setSelectedFont }) {
             : selectedFont === "Mono"
             ? "'Inconsolata', monospace"
             : null,
+        background: activeTheme === "light" ? "white" : "black",
       }}
     >
       {data && data.length > 0 ? (
         <div className="px-6 pb-[85px]">
           <div className="w-full flex items-center justify-between">
             <div className="block">
-              <h1 className="font-bold text-[32px] lowercase">{word}</h1>
+              <h1
+                className="font-bold text-[32px] lowercase"
+                style={{ color: activeTheme === "light" ? "black" : "white" }}
+              >
+                {word}
+              </h1>
               <h3 className="mt-2 text-[18px] text-activePurpleBorder">
                 {data[0].phonetic}
               </h3>
@@ -112,7 +130,12 @@ function WordDefinition({ word, selectedFont, setSelectedFont }) {
             partsOfSpeech.map((partOfSpeech, index) => (
               <div key={index} className="mt-8">
                 <div className="flex items-center justify-between w-full gap-5">
-                  <h2 className="text-[18px] font-bold lowercase italic">
+                  <h2
+                    className="text-[18px] font-bold lowercase italic"
+                    style={{
+                      color: activeTheme === "light" ? "black" : "white",
+                    }}
+                  >
                     {partOfSpeech}
                   </h2>
                   <div className="h-[1px] bg-lightGray w-full"></div>
@@ -133,7 +156,15 @@ function WordDefinition({ word, selectedFont, setSelectedFont }) {
                             >
                               <div className="flex items-baseline gap-5">
                                 <div className="w-[5px] h-[5px] bg-activePurpleBorder rounded-full"></div>
-                                <p className="font-normal text-[15px] text-meanings w-full">
+                                <p
+                                  className="font-normal text-[15px] w-full"
+                                  style={{
+                                    color:
+                                      activeTheme === "light"
+                                        ? "#2d2d2d"
+                                        : "white",
+                                  }}
+                                >
                                   {definition.definition}
                                 </p>
                               </div>
@@ -196,7 +227,13 @@ function WordDefinition({ word, selectedFont, setSelectedFont }) {
                 className="flex items-center gap-[10px]"
                 onClick={() => window.open(url, "_blank")}
               >
-                <p key={index} className="underline">
+                <p
+                  key={index}
+                  className="underline"
+                  style={{
+                    color: activeTheme === "light" ? "black" : "white",
+                  }}
+                >
                   {url}
                 </p>
                 <NewWindowIcon />

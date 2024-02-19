@@ -13,6 +13,7 @@ export default {
         activePurpleBorder: "#a445ed",
         grayWords: "#757575",
         meanings: "#2d2d2d",
+        bgDarkInput: "#1f1f1f",
       },
     },
   },
