@@ -92,7 +92,7 @@ const Header = ({
           <div className="flex flex-row items-center gap-4">
             <div className="relative" ref={dropdownRef}>
               <div
-                className="flex items-center gap-4 border-lightGray border-solid border-r ml-24 py-1 pr-4 cursor-pointer"
+                className="flex items-center gap-4 border-lightGray border-solid border-r ml-20 py-1 pr-4 cursor-pointer"
                 onClick={toggleDropdown}
               >
                 <p
@@ -105,7 +105,7 @@ const Header = ({
               </div>
               {isOpen && (
                 <div
-                  className="absolute z-20 border border-lightGray border-radius-[0.5rem] bg-white left-[136px] w-[126px] p-6 ml-[-2.5rem] cursor-pointer md:w-[135px] md:text-[18px]"
+                  className="absolute z-20 border border-lightGray border-radius-[0.5rem] bg-white left-[119.5px] w-[126px] p-6 ml-[-2.5rem] cursor-pointer md:w-[135px] md:text-[18px] md:left-[120px] lg:left-[110.5px]"
                   style={{ top: "100%" }}
                 >
                   <ul className="text-gray-700 w-[100px]">
